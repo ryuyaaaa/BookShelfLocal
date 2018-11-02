@@ -61,6 +61,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def my_books
+    @books = current_user.books.page params[:page]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -69,6 +73,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author)
+      params.require(:book).permit(:title, :author, category_ids: [])
     end
 end
